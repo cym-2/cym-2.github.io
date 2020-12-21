@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Hello World"
-categories: testing
+categories: etc.
 ---
 
 # Hello World
 
-Is this thing on?
+Hello World
