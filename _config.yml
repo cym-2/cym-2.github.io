@@ -8,55 +8,55 @@
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 #--------------------------
 # the main title
-title: "@Okie_Chase"
+title: "@CYM"
 
 # it will display as the sub-title
-tagline: Personal blog under construction.
+tagline: Study Archive Devlog
 
 # used by seo meta and the atom feed
 description: >-
-  "Personal blog of Chase Dickinson built using Chirpy theme for Jekyll and deployed on GitHub Pages."
+  "Study Archive Devlog of CYM."
 
 # fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
-url: "https://ChaseDickinson.github.io"
+url: "https://cym-2.github.io"
 
 # change to your full name
-author: Chase Dickinson
+author: CYM
 
 # support internet resources
 avatar: /assets/img/profile.jpg
 
 # change to your linkedin username
 linkedin:
-  username: chaseadickinson
+  username: cym
 
 # change to your github username
 github:
-  username: chasedickinson
+  username: cym-2
 
 # change to your twitter username
-twitter:
-  username: okie_chase
+#twitter:
+#  username: cym
 
 # change to your instagram username
-instagram:
-  username: okie_chase
+#instagram:
+#  username: cym
 
 social:
   # it will shows as the copyright owner in Footer
-  name: Chase Dickinson
+  name: CYM
   # change to your email address
-  #email: example@doamin.com
+  email: cym.7172@gmail.com
   links:
     # The first element serves as the copyright owner's link
     # change to your linkedin homepage
-    - https://linkedin.com/in/chaseadickinson
+    - https://linkedin.com/in/cym
     # change to your github homepage
-    - https://github.com/chasedickinson
+    - https://github.com/cym-2
     # change to your twitter homepage
-    - https://twitter.com/okie_chase
+    #- https://twitter.com/cym
     # change to your instagram homepage
-    - https://instagram.com/okie_chase/
+    #- https://instagram.com/cym/
 
 # change to your verification string
 #google_site_verification: google_meta_tag_verification
@@ -68,7 +68,7 @@ social:
 baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: America/Chicago
+timezone: Asia/Seoul
 
 google_analytics:
   # Fill with your Google Analytics ID
