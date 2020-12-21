@@ -11,6 +11,4 @@ order: 4
 
 # About
 
-Hey there! My name is Chase Dickinson. I am an IT professional that loves to tinker and try new things. Spending most of my time these days learning various cloud services and attempting to automate all of the things.
-
-Follow me on social: @Okie_Chase
+Study Archive Devlog of CYM.
