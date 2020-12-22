@@ -25,15 +25,15 @@ avatar: /assets/img/sample/avatar.jpg   # support internet resources
 github:
   username: cym-2             # change to your github username
 
-twitter:
-  username: cym            # change to your twitter username
+linkedin:
+  username: cym            # change to your linkedin username
 
 social:
   name: CYM                  # it will shows as the copyright owner in Footer
   email: cym.7172@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/cym      # change to your twitter homepage
+    - https://www.linkedin.com/in/yoomee-cho-5844ab202/      # change to your twitter homepage
     - https://github.com/cym-2       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
