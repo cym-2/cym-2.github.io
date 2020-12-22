@@ -1,1 +1,1 @@
-[Study Archive Devlog] https://cym-2.github.io/
+# [cym-2.github.io](https://cym-2.github.io/)
