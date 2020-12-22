@@ -8,38 +8,38 @@
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 #--------------------------
 
-title: 0xfinlay                          # the main title
+title: CYM                          # the main title
 
-tagline: Hack the Box Writeups  # it will display as the sub-title
+tagline: Study Archive Devlog  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  This is my blog where I will post Hack the Box writups.
+  Study Archive Devlog of CYM
 
 # Replace with the website url, e.g. 'https://username.github.io'
-url: 'https://0xfinlay.github.io'
+url: 'https://cym-2.github.io'
 
-author: Finlay Richardson                  # change to your full name
+author: CYM                  # change to your full name
 
 avatar: /assets/img/sample/avatar.jpg   # support internet resources
 
 github:
-  username: 0xfinlay             # change to your github username
+  username: cym-2             # change to your github username
 
 twitter:
-  username: Finlay_R10            # change to your twitter username
+  username: cym            # change to your twitter username
 
 social:
-  name: Finlay Richardson                  # it will shows as the copyright owner in Footer
-  email: finlay.richardson1@gmail.com             # change to your email address
+  name: CYM                  # it will shows as the copyright owner in Footer
+  email: cym.7172@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/Finlay_R10      # change to your twitter homepage
-    - https://github.com/0xfinlay       # change to your github homepage
+    - https://twitter.com/cym      # change to your twitter homepage
+    - https://github.com/cym-2       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
-google_site_verification: SCo2lbIakc-VXGCVO1S4TS_KJXxNrX86RqSKhe8Caks # change to your verification string
+google_site_verification: '' # change to your verification string
 
 #--------------------------
 
@@ -49,10 +49,10 @@ google_site_verification: SCo2lbIakc-VXGCVO1S4TS_KJXxNrX86RqSKhe8Caks # change t
 baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Europe/London
+timezone: Asia/Seoul
 
 google_analytics:
-  id: 'UA-177932267-1'          # Fill with your Google Analytics ID
+  id: ''          # Fill with your Google Analytics ID
   pv:
     # The Google Analytics pageviews switch.
     # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
