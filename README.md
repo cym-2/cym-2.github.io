@@ -2,4 +2,4 @@
 
 <br>
 <br>
-Study Archive Devlog of CYM since 2020.12
+CYM's Study Archive Devlog since 2020.12
