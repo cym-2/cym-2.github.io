@@ -1,0 +1,14 @@
+I"G<p><strong>(1) memmove<br /></strong>
+prototype: void *memmove(void *dest, const void *src, size_t n);<br />
+return: dest<br />
+메모리 블록을 옮김.<br />
+src가 가리키는 곳부터 n바이트 만큼을 dest가 가리키는 곳으로 옮김.<br />
+dest와 src가 가리키는 타입은 위 함수에서 상관 없음. 오직 단순하게 이진 데이터만을 복사.<br />
+위 함수는 src의 null 종료문자를 확인하지 않음. 언제나 n바이트만큼 복사 수행.<br />
+오버플로우를 방지하기 위해 dest와 src가 가리키는 배열 모두 적어도 n바이트 이상은 되어야 함.<br />
+src의 주소가 dest보다 작은 값이면 src의 마지막 데이터부터 한 바이트씩 dest의 마지막 바이트부터 순서대로 복사한다.<br />
+src의 주소가 dest보다 크거나 같은 값이면 src의 처음부터 n만큼 dest에 복사한다,<br />
+src를 한 바이트씩 복사하더라도 dest보다 큰 위치에 있기 때문에, <br />
+오버랩 되더라도 src를 모두 정상적으로 dest에 복사할 수 있음.<br />
+<br /></p>
+:ET
