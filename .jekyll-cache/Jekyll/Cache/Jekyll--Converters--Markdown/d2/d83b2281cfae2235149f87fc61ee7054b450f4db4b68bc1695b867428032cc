@@ -1,0 +1,102 @@
+I"R<p>printf는 매개변수의 개수가 정해지지 않은 함수.<br />
+매번 함수에 들어가는 인수(argument)의 개수가 변하는 것을 가변 인자(가변 인수, variable argument)라고 함.<br />
+<br /></p>
+
+<h2 id="가변-인수-리스트-처리">가변 인수 리스트 처리</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td> --><td class="rouge-code"><pre>#include &lt;stdarg.h&gt;
+void va_start(va_list arg_ptr, variable_name);
+var_type va_arg(va_list arg_ptr, var_type);
+void va_end(va_list arg_ptr);
+void va_copy(va_list dest, va_list src);
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>va_list</strong><br />
+이 타입은 가변 파라페터를 위한 데이터 타입으로 가변 함수 정의 부분에서 가변 파라메터를 처리하기 위해 선언.<br />
+<br />
+<strong>void va_start(va_list arg_ptr, variable_name)</strong><br />
+가변 파라메터(arg_ptr)의 시작위치를 함수에 주어진 마지막 고정 파라메터(variable_name) 다음으로 초기화 해주며, 일반적으로 함수의 첫 부분에 사용.<br />
+<br />
+<strong>var_type va_arg(va_list arg_ptr, var_type)</strong><br />
+가변 파라메터(arg_ptr)에서 주어진 타입(var_type)의 값을 읽고 가변 파라메터(arg_ptr)의 위치를 다음으로 이동시킴.<br />
+<br />
+<strong>void va_end(va_list arg_ptr);</strong><br />
+모든 인수가 검색 된 후 va_end 는 포인터를 NULL 로 다시 설정. 함수의 마지막 부분에 사용.<br />
+<br />
+<strong>void va_copy(va_list dest, va_list src);</strong><br />
+src에 저장된 가변 파라메터를 dest로 복사.<br />
+<br />
+<br />
+<br />
+가변 함수를 정의할 때 최소 한 개 이상의 파라메터는 반드시 정상적으로 “int a”와 같이 타임과 변수명을 선언해야 하며, <br />
+나머지 가변 파라메터 부분은 “…“으로 선언하면 됨.<br />
+“…“은 함수 파라메터의 맨 마지막에 선언해야 함. <br />
+<br />
+<br />
+<br /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td> --><td class="rouge-code"><pre>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+void testit (int i, ...)
+{
+    va_list argptr; /* 가변 파라메터 저장을 위한 변수 argptr 선언 */
+    va_start(argptr, i); /* 가변 파라메터가 i 다음부터 시작됨을 알림 */
+
+    if (i == 0)
+    {
+        int n = va_arg(argptr, int); /* 가변 파라메터에서 정수 값을 읽고 다음 값을 읽기 위해 준비 */
+        printf("%d\n", n);
+    }
+    else
+    {
+        char *s = va_arg(argptr, char*);
+        printf("%s\n", s);
+    }
+
+    va_end(argptr); /* 가변 파라메터를 다 사용함 */
+}
+
+int main()
+{
+    testit(0, 0xFFFFFFFF); // 1st problem: 0xffffffff is not an int
+    testit(1, NULL);       // 2nd problem: NULL is not a char*
+}
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="printf의-return값">printf의 return값</h2>
+<p>printf()의 return값은 출력에 성공한 문자의 수.</p>
+
+:ET
