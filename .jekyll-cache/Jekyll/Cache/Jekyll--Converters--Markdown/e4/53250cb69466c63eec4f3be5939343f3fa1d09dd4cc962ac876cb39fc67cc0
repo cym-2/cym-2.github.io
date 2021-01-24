@@ -1,0 +1,246 @@
+I"�<h1 id="python">Python</h1>
+<p><br />
+<br /></p>
+
+<p><strong>0001.</strong> 넘파이는 수치 계산용 라이브러리. 고도의 수학 알고리즘과 배열(행렬) 조작을 위한 편리한 메서드 많음.<br />
+<br /></p>
+
+<p><strong>0002.</strong> matplotlib은 그래프를 그려주는 라이브러리.<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0003.</strong> 파이썬에는 type() 함수로 특정 데이터의 자료형을 알아볼 수 있음.<br />
+<br /></p>
+
+<p><strong>0004.</strong> 파이썬은 동적 언어. (동적: 변수의 자료형을 상황에 맞게 자동으로 결정)<br />
+<br /></p>
+
+<p><strong>0005.</strong> 파이썬 같은 동적 언어는 C나 C++같은 정적 언어(컴파일 언어)보다 처리 속도가 늦음.<br />
+<br /></p>
+
+<p><strong>0006.</strong> + 연산자를 사용하여 문자열을 이어 붙일 수 있음.<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0007.</strong> 개발자가 직접 클래스를 정의하면 독자적인 자료형을 만들 수 있음.<br />
+<br /></p>
+
+<p><strong>0008.</strong> 클래스에는 그 클래스만의 전용 함수(메서드)와 속성을 정의할 수 있음.<br />
+<br /></p>
+
+<p><strong>0009.</strong> 클래스 정의에는 __init__라는 특별한 메서드가 있는데, 클래스를 초기화하는 방법을 정의.<br />
+<br /></p>
+
+<p><strong>0010.</strong> 이 초기화용 메서드를 생성자라고도 하며, 클래스의 인스턴스가 만들어질 때 한 번만 불림.<br />
+<br /></p>
+
+<p><strong>0011.</strong> 파이썬에서는 메서드의 첫 번째 인수로 자신(자신의 인스턴스)를 나타내는 self를 명시적으로 씀.<br />
+<br /></p>
+
+<p><strong>0012.</strong> 인스턴스 변수는 인스턴스별로 저장되는 변수.(self.name)<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0013.</strong> np.array()는 파이썬의 리스트를 인수로 받아 넘파이 라이브러리가 제공하는 특수한 형태의 배열 반환.<br />
+<br /></p>
+
+<p><strong>0014.</strong> ‘원소별’ = element-wise<br />
+<br /></p>
+
+<p><strong>0015.</strong> 벡터와 행렬을 일반화 한 것: 텐서(tensor)<br />
+<br /></p>
+
+<p><strong>0016.</strong> X = X.flatten() # X를 1차원 배열로 변환 <br />
+<br /></p>
+
+<p><strong>0017.</strong> X[np.array([0, 2, 4])] # 인덱스가 0, 2, 4인 원소 얻기<br />
+<br /></p>
+
+<p><strong>0018.</strong> X[X&gt;15]<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0019.</strong> 그래프를 그리려면 matplotlib의 pyplot모듈을 이용.<br />
+<br /></p>
+
+<p><strong>0020.</strong> <br /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre>import numpy as np
+import matplotlib.pyplot as plt
+
+# 데이터 준비
+x = np.arange(0, 6, 0.1) # 0에서 6까지 0.1 간격으로 생성
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# 그래프 그리기
+plt.plot(x, y1, label = "sin")
+plt.plot(x, y2, linestyle = "--", label = "cos") # cos 함수는 점선으로 그리기
+plt.xlabel("x") # x축 이름
+plt.ylable("y") # y축 이름
+plt.title('sin &amp; cos') # 제목
+plt.legend()
+plt.show()
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>0021.</strong> pyplot에는 이미지를 표시해주는 메서드인 imshow()가 있음.<br />
+<br /></p>
+
+<p><strong>0022.</strong> 이미지를 읽어 들일 때는 matplotlib.image 모듈의 imread() 메서드 이용.<br /></p>
+
+<p><br />
+<br />
+<br />
+<br />
+<br /></p>
+
+<h1 id="perceptron-algorithm">Perceptron Algorithm</h1>
+<p><br />
+<br /></p>
+
+<p><strong>0023.</strong> 퍼셉트론이 딥러닝의 기원이 되는 알고리즘.<br />
+<br /></p>
+
+<p><strong>0024.</strong> 퍼셉트론은 다수의 신호를 입력으로 받아 하나의 신호를 출력.<br />
+<br /></p>
+
+<p><strong>0025.</strong> 퍼셉트론 신호는 ‘흐른다/안 흐른다(1이나 0)’의 두 가지 값을 가질 수 있음.<br />
+<br /></p>
+
+<p><strong>0026.</strong> 뉴런 = 노드<br />
+<br /></p>
+
+<p><strong>0027.</strong> 뉴런에서 보내온 신호의 총합이 정해진 한계(임계값)를 넘어설 때만 1을 출력<br />
+<br /></p>
+
+<p><strong>0028.</strong></p>
+
+<p><img src="http://www.sciweavers.org/upload/Tex2Img_1610627699/render.png" alt="img" /></p>
+
+<p><br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0029.</strong> 학습이란 적절한 매개변수 값을 정하는 작업<br />
+<br /></p>
+
+<p><strong>0030.</strong> theta를 -b로 치환하면,</p>
+
+<p><img src="http://www.sciweavers.org/upload/Tex2Img_1610627828/render.png" alt="img" /></p>
+
+<p><br /></p>
+
+<p><strong>0031.</strong> np.sum(w*x)
+<br /></p>
+
+<p><strong>0032.</strong> w1과 w2는 각 입력 신호가 결과에 주는 영향력(중요도)를 조절하는 매개변수고, b(편향)은 뉴런이 얼마나 쉽게 활성화(결과로 1을 촐력)하느냐를 조정하는 매개변수.<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0033.</strong> XOR: 배타적 논리합. x1과 x2 중 한쪽이 1일 때만 1을 출력.<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0034.</strong> 단층 퍼셉트론으로는 비선형 영역을 분리할 수 없음.
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+
+<h1 id="neural-network">Neural network</h1>
+<p><br />
+<br /></p>
+
+<p><strong>0035.</strong> 입력층, 은닉 층, 출력층<br />
+<br /></p>
+
+<p><strong>0036.</strong> 단층 퍼셉트론: 단층 네트워크에서 계단 함수(임계값을 경계로 출력이 바뀌는 함수)를 활성화 함수로 사용한 모델<br />
+<br /></p>
+
+<p><strong>0037.</strong> 다층 퍼셉트론: 신경망(여러 층으로 구성되고 시그모이드 함수 등의 매끈한 활성화 함수를 사용하는 네트워크)<br />
+<br /></p>
+
+<p><strong>0038.</strong> 시그모이드 함수<br /></p>
+
+<p><img src="http://www.sciweavers.org/upload/Tex2Img_1610628259/render.png" alt="img" /></p>
+
+<p><br /></p>
+
+<p><strong>0039.</strong> 넘파이 배열의 자료형을 변환할 때는 astype() 메서드 이용.<br />
+<br /></p>
+
+<p><strong>0040.</strong> plt.ylim(-0.1, 1.1) # y축의 범위 지정<br />
+<br /></p>
+
+<p><strong>0041.</strong> np.exp(-x)<br />
+<br /></p>
+
+<p><strong>0042.</strong> 선형함수: 입력의 상수배만큼 변하는 함수<br />
+<br /></p>
+
+<p><strong>0043.</strong> 비선형함수: 직선 1개로는 그릴 수 없는 함수<br />
+<br /></p>
+
+<p><strong>0044.</strong> 계단 함수와 시그모이드 함수의 공통점은 둘 모두 비선형 함수.<br />
+<br /></p>
+
+<p><strong>0045.</strong> 선형 함수를 이용하면 신경망의 층을 깊게 하는 의미가 없어짐. ‘은닉층이 없는 네트워크’로도 똑같은 기능을 할 수 있음.<br />
+<br /></p>
+
+<p><strong>0046.</strong> ReLU는 입력이 0을 넘으면 그 입력을 그대로 출력하고, 0 이하면 0을 출력.<br /></p>
+
+<p><img src="http://www.sciweavers.org/upload/Tex2Img_1610628588/render.png" alt="img" /></p>
+
+<p><br /></p>
+
+<p><strong>0047.</strong> np.maximum(0, x)<br />
+<br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><strong>0048.</strong> np.ndim(A)<br />
+<br /></p>
+
+<p><strong>0049.</strong> np.dot(A, B)<br /></p>
+:ET
