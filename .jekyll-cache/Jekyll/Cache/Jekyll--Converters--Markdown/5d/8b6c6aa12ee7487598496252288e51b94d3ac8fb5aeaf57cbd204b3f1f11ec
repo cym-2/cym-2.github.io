@@ -1,0 +1,121 @@
+I"�<p><strong>(1) memmove<br /></strong>
+prototype: void *memmove(void *dest, const void *src, size_t n);<br />
+return: dest<br />
+메모리 블록을 옮김.<br />
+src가 가리키는 곳부터 n바이트 만큼을 dest가 가리키는 곳으로 옮김.<br />
+dest와 src가 가리키는 타입은 위 함수에서 상관 없음. 오직 단순하게 이진 데이터만을 복사.<br />
+위 함수는 src의 null 종료문자를 확인하지 않음. 언제나 n바이트만큼 복사 수행.<br />
+오버플로우를 방지하기 위해 dest와 src가 가리키는 배열 모두 적어도 n바이트 이상은 되어야 함.<br />
+src의 주소가 dest보다 작은 값이면 src의 마지막 데이터부터 한 바이트씩 dest의 마지막 바이트부터 순서대로 복사한다.<br />
+src의 주소가 dest보다 크거나 같은 값이면 src의 처음부터 n만큼 dest에 복사한다,<br />
+src를 한 바이트씩 복사하더라도 dest보다 큰 위치에 있기 때문에, <br />
+오버랩 되더라도 src를 모두 정상적으로 dest에 복사할 수 있음.<br />
+<br /></p>
+
+<p><strong>(2) memchr</strong><br />
+prototype: void *memchr(void *ptr, int value, size_t num);<br />
+return:</p>
+<ul>
+  <li>메모리 블록에서 value와 일치하는 값이 있으면: ptr이 가리키는 메모리의 처음 n바이트 중에서 처음으로 value와 일치하는 값의 주소</li>
+  <li>값을 찾지 못하면: NULL<br /></li>
+</ul>
+
+<p>메모리 블록에서의 문자를 찾음.<br />
+<br /></p>
+
+<p><strong>(3) memcmp</strong><br />
+prototytpe: int memcmp(const void *ptr1, const void *ptr2, size_t num);<br />
+return:</p>
+<ul>
+  <li>두 메모리 블록이 정확히 같다면: 0</li>
+  <li>두 메모리 블록이 다를 경우, ptr1과 ptr2가 가리키는 메모리 블록에서 앞에서부터 처음으로 다른 바이트를 살펴보는데, 그 바이트를 unsigned char로 해석하였을 때, 그 값이 ptr1이 더 크면 0보다 큰 값을 아니면 0보다 작은 값을 리턴<br /></li>
+</ul>
+
+<p>두 개의 메모리 블록을 비교<br />
+<br /></p>
+
+<p><strong>(4) strchr</strong><br />
+prototype: char *strchr(const char *str, int c)<br />
+return:</p>
+<ul>
+  <li>문자열 str에서 첫번째로 찾은 문자 c의 위치의 포인터</li>
+  <li>만약 찾지 못했다면 NULL<br /></li>
+</ul>
+
+<p>문자열에서 특정 문자를 찾을 때 사용.<br />
+<br /></p>
+
+<p><strong>(5) strrchr</strong><br />
+prototype: char *strrchr(const char *str, int c)<br />
+return:</p>
+<ul>
+  <li>문자열 str에서 마지막으로 찾은 문자 c의 위치의 포인터</li>
+  <li>만약 찾지 못했다면 NULL<br /></li>
+</ul>
+
+<p>문자열에서 특정 문자를 찾을 때 사용.<br />
+<br /></p>
+
+<p><strong>(6) strnstr</strong><br />
+prototype: char *strnstr(const char *big, const char *little, size_t n)<br />
+return:</p>
+<ul>
+  <li>little 문자열이 비어있을 경우, big문자열</li>
+  <li>little 문자열이 big 문자열 내에 없는 경우 NULL</li>
+  <li>위의 경우들이 아니라면, little문자열을 찾은 문자열 중 첫글자를 가리키는 포인터<br /></li>
+</ul>
+
+<p>종료 전까지의 문자들 중 big 문자열 내에서 찾은 little 문자열 중 첫번째로 나온 결과를 찾음.<br />
+문자열은 최대 n의 수까지만 탐색.<br />
+문자열들은 ‘\0’을 만나면 더 이상 찾지 않음.<br />
+<br /></p>
+
+<p><strong>(7) isalnum</strong><br />
+prototype: int isalnum(int c);<br />
+return: c가 알파벳 또는 숫자이면 0이 아닌 값을 반환.<br />
+<br /></p>
+
+<p><strong>(8) calloc</strong><br />
+prototype: void *calloc(size_t n, size_t size)<br />
+return: 할당된 공간에 대한 포인터<br />
+malloc 및 calloc은 할당하고자 하는 메모리 크기를 바이트 단위로 할당할 수 있는 함수.<br />
+이 두개의 차이는 malloc은 할당하면 쓰레기값이 들어가 있고, calloc은 값이 0으로 초기화.<br />
+size크기의 변수를 n개 만큼 저장할 수 있는 메모리 공간 할당.<br />
+<br />
+<br /></p>
+
+<p><strong>etc.</strong><br />
+매개변수 앞에 const를 쓰는 이유:<br />
+포인터를 함수에 전달할 경우 call by reference이므로 전달한 포인터의 값을 함수 내부에서 수정할 수 있음.<br /> 
+반면에 단순히 포인터 주소 가지고 연산만 하려는 경우일 수 있음.<br />
+이 경우에 함수 정의만 보고는 다른 사람이 만든 함수가 내가 전달한 파라미터 값을 내부에서 수정하는지,<br /> 
+아니면 리턴값을 구하기 위해 참조만 하는 것인지 알 수 없음.<br />
+함수 파라미터에 const pointer를 쓰는 의미는 ‘값 참조만 할꺼고 수정은 안하니까 리턴값만 잘 확인해라’라는 의미.<br />
+<br />
+static 함수를 쓰는 이유:<br />
+static을 쓰는 경우의 장점은 다른 소스 파일에서 같은 이름으로 함수를 만들었을 때도 제대로 동작.<br />
+static으로 선언해놓으면 그 파일 내에서만 사용하는 것으로 됨.<br />
+그래서 외부에 인터페이스가 노출되지 않음.<br />
+<br />
+unsigned int: <br />
+unsigned int형은 음수를 표현하지 않음으로써 int형보다 두 배로 큰 양수까지 표현할 수 있다. <br />
+<br />
+함수 포인터:<br />
+반환값자료형 함수이름(함수포인터반환값자료형 (*함수포인터이름)(함수포인터매개변수자료형1, 함수포인터매개변수자료형2))<br />
+ex) void executer(int (*fp)(int, int)<br />
+<br />
+파일 디스크립터:<br /></p>
+<ul>
+  <li>시스템으로부터 할당 받은 파일을 대표하는 0이 아닌 정수 값</li>
+  <li>프로세스에서 열린 파일의 목록을 관리하는 테이블의 인덱스<br /></li>
+</ul>
+
+<p>흔히 유닉스 시스템에서 모든 것은 파일이라고 함.<br />
+일반적인 정규파일(Regular File)에서부터 디렉토리(Directory), 소켓(Socket), 파이프(PIPE), 블록 디바이스, 캐릭터 디바이스 등등 모든 객체즐은 파일로써 관리됨.<br />
+유닉스 시스템에서 프로세스가 이 파일들을 접근할 때에 파일 디스크립터(File Descriptor)라는 개념을 이용.<br />
+파일 디스크립터는 ‘0이 아닌 정수’값. 음수가 아닌 0과 양수인 정수 값.<br />
+프로세스가 실행 중에 파일을 Open하면 커널은 해당 프로세스의 파일 디스크립터 숫자 중에 사용하지 않은 가장 작은 값 할당.<br />
+그 다음 프로세스가 열려있는 파일에 시스템 콜을 이용해서 접근 할 때, FD값을 이용해 파일 지칭.<br />
+<br />
+<br /></p>
+:ET
