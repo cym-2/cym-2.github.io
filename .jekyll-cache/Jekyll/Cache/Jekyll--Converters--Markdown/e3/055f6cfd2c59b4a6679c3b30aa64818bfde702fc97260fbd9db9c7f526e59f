@@ -1,0 +1,166 @@
+I")<h2 id="linked-list">Linked List</h2>
+
+<p><strong>연결 리스트</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>private class Node
+{
+    Item item;
+    Node next;
+}
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+
+<p><strong>연결 리스트 만들기</strong><br />
+단순히 노드가 null인지 아니면 next 필드를 통해 다른 노드를 가리키고 있는지만 확실히 하면 된다. 예를 들어 “to”, “be”, “or”를 저장하는 연결 리스트를 만들어 보자. 먼저 다음과 같이 데이터를 담을 노드들을 만든다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>Node first = new Node();
+Node second = new Node();
+Node third = new Node();
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>그리고 각 노드의 item필드에 목적하는 데이터 값을 대입한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>first.item = "to";
+second.item = "be";
+third.item = "or";
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>그리고 각 노드의 next 필드를 다음 노드를 가리키도록(참조하도록) 하여 서로 연결(링크)되게 한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>first.next = second;
+second.next = third;
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>여기서 third.next는 처음 생성될 때의 초깃값 null로 유지된다. 위와 같은 연결 작업의 결과로 first, second, third는 연결 리스트가 된다. first는 second를 가리키고, second는 third를 가리킨다. 그리고 third는 다음 노드로 null값을 가리킨다. 이때 각각의 노드 하나하나가 연결 리스트이다. third의 경우 공백 연결 리스트를 가리키는 연결 리스트이다.<br />
+연결 리스트는 항목들의 시퀀스(순서를 가진 나열)을 표현한다. 위의 예에서 first는 “to”, “be”, “or”의 시퀀스를 표현한다. 이러한 순열을 표현하는데 아래처럼 문자열의 배열을 사용할 수도 있다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>String[] s = {"to", "be", "or"};
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>연결 리스트가 배열과 다른 점은 순열에 새로운 항목을 추가, 삭제하기가 훨씬 쉽다는 것이다.<br />
+<br /></p>
+
+<p><strong>시작 부분에 항목 추가하기</strong><br />
+가장 쉽게 노드를 넣을 수 있는 위치는 리스트의 시작 부분이다. 예를 들어 문자열 “not”을 노드 first가 첫 번째 노드인 연결 리스트에 추가하는 상황을 보자. “not”을 연결 리스트의 시작 부분에 추가하는 방법은 first를 oldfirst로 백업해 두고 first에 새 노드를 대입한 후 first의 다음 노드로 백업해둔 oldfirst를 대입하는 것이다. 몇 번의 대입문만으로 새로운 노드를 추가할 수 있다. 이 작업의 소요 시간은 전체 연결 리스트의 길이가 얼마나 길든 상관없이 일정하다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>//시작 노드 백업해 두기
+Node oldfirst = first;
+//리스트의 시작 부분에 새로운 노드를 생성
+first = new Node();
+//새로운 노드에 백업해둔 시작 노드 연결하기
+first.item = "not";
+first.next = oldfirst;
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+
+<p><strong>시작 부분에서 항목 삭제하기</strong><br />
+삭제는 추가보다 더 간단하다. 그냥 first.next를 first에 대입하기만 하면 된다. 보통은 삭제하기 전에 Item 타입의 어떤 변수에 first의 데이터 값을 대입하여 값을 얻어간다. 왜냐하면 first의 참조 대상이 바뀌고 나면 바뀌기 전 노드의 데이터 값에 접근할 방법이 없어지기 때문이다. 즉 삭제 식전의 first가 가리키던 객체는 고아 상태가 되어 종국적으로는 자바의 메모리 관리 시스템에 의해 메모리에서 해제되게 된다. 삭제 작업은 한 번의 대입문으로 수행되기 때문에 앞서의 항목 추가 작업과 마찬가지로 연결 리스트의 길이와는 상관없이 소요 시간이 일정하다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>first = first.next;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>끝부분에 항목 추가하기</strong><br />
+리스트의 마지막 노드에 새로운 노드를 연결해야 한다. 왜냐하면 마지막 노드의 다음 노드에 대한 참조가 새로 추가되는 노드를 가리켜야 하기 때문이다.<br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>// 끝 노드로의 링크를 백업
+Node oldlast = last;
+// 끝 노드에 새로운 노드를 생성
+last = new Node();
+last.item = "not";
+// 새로운 노드를 백업했던 끝 노드에 링크
+oldlast.next = last;
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>연결 리스트의 디버깅은 까다롭기로 악명이 높다. 예를 들어, 첫 번째 노드를 삭제할 때, 리스트에 항목이 단 하나만 남게 될 경우 마지막 노드에 대한 참조 변수도 변경해야 한다. 즉 첫 번째 노드와 마지막 노드가 같은 노드가 된다. 그리고 항목이 하나도 없는 상태가 된다면 null 노드에서 null 링크를 따라가야 하므로 코드가 제대로 작동하지 않는다.<br />
+<br /></p>
+
+<p><strong>임의의 위치에 대한 추가/삭제</strong><br />
+요약하면, 연결 리스트의 첫 번째 노드와 마지막 노드에 대한 참조 변수만 있으면 아래의 동작들을 단 몇 개의 명령어만으로 구현할 수 있다.</p>
+<ul>
+  <li>리스트의 시작에 부분에서 항목을 추가</li>
+  <li>리스트의 시작에 부분에서 항목을 삭제</li>
+  <li>리스트의 마지막에 항목을 추가</li>
+</ul>
+
+<p>하지만 아래와 같은 다른 동작들은 그렇게 쉽게 구현되지는 않는다.</p>
+<ul>
+  <li>주어진 특정 노드의 삭제</li>
+  <li>주어진 특정 노드의 앞에 새로운 노드를 추가</li>
+</ul>
+
+<p>예를 들어 리스트의 마지막 항목을 어떻게 삭제할 수 있을까? 연결 리스트 자체만으로 방법이 없다. 왜냐하면 마지막 노드를 가리키는 참조 변수는 자신을 가리키고 있는 바로 앞 노드를 알지 못하기 때문에, 자신이 삭제된 후 새로운 마지막 노드가 될 노드의 next 값을 null로 바꿀 수가 없다. 따라서 추가적인 정보가 없다면 마지막 노드까지 전체 리스트를 모두 순회해야 한다. 이러한 방법은 바람직하지 않다. 왜냐하면 전체 순회에 소요되는 시간은 리스트의 길이에 비례하기 때문이다. 임의의 위치에 대한 추가/삭제를 가능하게 하는 표준적인 해결책은 이중 연결 리스트를 사용하는 것이다. 이중 연결 리스트는 다음 노드에 대한 링크뿐만 아니라 바로 앞 노드에 대한 링크까지 양방향 연결 정보를 모두 가진다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>배열 a[]의 모든 항목들을 검사해야 할 때 아래와 같이 익숙한 코드를 사용.
+for (int i = 0; i &lt; N ; i++)
+{
+    //a[i]에 대한 처리
+}
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>연결 리스트의 항목을 순회할 때도 이와 비슷한 관용적인 코드가 있다. 루트 변수 x를 연결 리스트의 첫 번째 노르를 참조하도록 초기화한다. 그 다음에 x의 데이터 값을 x.item을 통해 접근한다. 그리고 x가 자신의 다음 노드를 가리키도록 x.next를 x에 대입한다. 이 작업을 x가 null이 될 때까지 반복한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>for (Node x = first; x != null; x = x.next)
+{
+    //x.item에 대한 처리
+}
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>데이터 구조</th>
+      <th>장점</th>
+      <th>단점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>배열</td>
+      <td>어떤 항목이든 인덱스로 바로 접근 가능</td>
+      <td>초기화 시점에서 미리 크기를 알아야 함</td>
+    </tr>
+    <tr>
+      <td>연결 리스트</td>
+      <td>실제 저장되는 항목 개수에 비례하여 공간 소요</td>
+      <td>항목에 접근하기 위해 간접적인 참조 필요</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>[참조] 알고리즘 개정 4판 
+<br />
+<br /></p>
+
+<p><strong>etc.</strong> <br />
+<em>void * allows to store any kind of data.</em></p>
+
+<p><br />
+<br /></p>
+:ET
