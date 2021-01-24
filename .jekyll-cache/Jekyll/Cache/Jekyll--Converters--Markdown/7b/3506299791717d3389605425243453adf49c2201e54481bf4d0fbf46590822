@@ -1,0 +1,184 @@
+I"�<h1 id="overview">Overview</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td> --><td class="rouge-code"><pre>| WordPress | phpMyAdmin | ---------------- |
+| ------- MySQL -------- | -- 다른 도커 --- |
+| Nginx (autoindex, SSL) | --- 컨테이너 --- |      
+| ---- Debian Buster ----| -----------------| 
+| ---------------- Docker ------------------| 
+| ---------------- Mac OS ------------------|
+
+Server: Nnginx
+DB: Mysql
+DB관리: phpMyAdmin
+View: WordPress
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="docker">Docker</h2>
+<p>컨테이너 기반의 오픈소스 가상화 플랫폼 (=컨테이너를 관리하는 플랫폼)<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="container">Container</h2>
+<p>격리된 공간에서 프로세스가 동작하는 기술.<br />
+하나의 서버에 여러개의 컨테이너를 실행하면 서로 영향을 미치지 않고 독립적으로 실행되어 마치 가벼운 VMVirtual Machine을 사용하는 느낌.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="image">Image</h2>
+<p>컨테이너 실행에 필요한 파일과 설정값등을 포함하고 있는 것.<br />
+상태값을 가지지 않고 변하지 않음(Immutable).<br />
+컨테이너는 이미지를 실행한 상태라고 볼 수 있고 추가되거나 변하는 값은 컨테이너에 저장됨.<br />
+같은 이미지에서 여러개의 컨테이너를 생성할 수 있고 컨테이너의 상태가 바뀌거나 컨테이너가 삭제되더라도 이미지는 변하지 않고 그대로 남아있음.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="서버-관리에-왜-도커">서버 관리에 왜 도커?</h2>
+<p>서버 관리는 복잡하고 어려움.<br />
+도커(Docker) 가 등장하고 서버관리 방식이 완전히 바뀜.<br />
+다양한 프로그램, 실행환경을 컨테이너로 추상화하고 동일한 인터페이스를 제공하여 프로그램의 배포 및 관리를 단순하게 해줌.<br />
+이미지는 컨테이너를 실행하기 위한 모든 정보를 가지고 있기 때문에 더 이상 의존성 파일을 컴파일하고 이것저것 설치할 필요가 없기 때문.<br /> 
+이제 새로운 서버가 추가되면 미리 만들어 놓은 이미지를 다운받고 컨테이너를 생성만 하면 됨.<br />
+한 서버에 여러개의 컨테이너를 실행할 수 있고, 수십, 수백, 수천대의 서버도 문제없음.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="docker-hub">Docker hub</h2>
+<p>도커 이미지의 용량은 보통 수백 메가로 수 기가가 넘는 경우 흔함.<br />
+이렇게 큰 용량의 이미지를 서버에 저장하고 관리하는 것은 쉽지 않은데 도커는 Docker hub를 통해 공개 이미지를 무료로 관리해줌.<br />
+Docker hub에서 공개된 이미지를 다운받아 사용하거나, Docker Registry 저장소를 직접 만들어 관리할 수 있음.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="dockerfile">Dockerfile</h2>
+<p>도커 이미지 빌드 자동화를 위한 지시문 세트가 들어가는 파일. 메이크파일과 비슷.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="nginx">Nginx</h2>
+<p>무료로 제공되는 오픈소스 웹 서버 프로그램<br />
+규모가 작은 서비스이면서 정적 데이터 처리가 많은 서비스에 적합<br />
+<em>웹 서버는 클라이언트로 부터 요청이 발생했을 때 요청에 맞는 정적콘텐츠을 보내주는 역할</em><br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="autoindex">Autoindex</h2>
+<p>웹 서버는 어떻게 수 많은 리소스 중 요청에 알맞은 콘텐츠를 제공할까?<br />
+일반적으로 웹 서버 파일 시스템의 특별한 한 폴더를 웹 콘텐츠를 위해 사용.<br /> 
+이 폴더를 문서루트 혹은 docroot라고 부름.<br />
+리소스 매핑의 가장 단순한 형태는 요청 URI를 dotroot 안에 있는 파일의 이름으로 사용하는 것.<br />
+만약 파일이 아닌 디렉토리를 가리키는 url에 대한 요청을 받았을 때는, <br />
+요청한 url에 대응되는 디렉토리 안에서 index.html 혹은 index.htm으로 이름 붙은 파일을 찾아 그 파일의 콘텐츠를 반환.<br /> 
+이를 autoindex 라고 부름.<br />
+만약 autoindex가 꺼져 있거나 해당 디렉토리에 index 목록에 해당하는 파일이 없다면,<br /> 
+웹 서버는 자동으로 그 디렉토리의 파일들을 크기, 변경일, 해당 파일에 대한 링크와 함께 열거한 HTML 파일을 반환.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="ssl-protocole-secure-socket-layer">SSL protocole (Secure Socket Layer)</h2>
+<p>HTTP 위에서 돌아가는 프로토콜.<br />
+서버&lt;-&gt;클라이언트 간 인증에 사용.<br />
+암호화 키를 송수신.<br />
+SSL은 보안과 성능상의 이유로 2가지 암호화 기법(대칭키, 공개키)을 혼용해서 사용.<br />
+<br /></p>
+
+<h3 id="ssl-인증서">SSL 인증서</h3>
+<ul>
+  <li>역할
+    <ul>
+      <li>(클라이언트)내가 접속한 서버가 신뢰할 수 있는 서버임을 보장.</li>
+      <li>SSL 통신에 사용할 공개키를 나(클라이언트)에게 제공.</li>
+    </ul>
+  </li>
+  <li>인증서에 담긴 것(자물쇠 누르면 볼 수 있음)
+    <ul>
+      <li>서비스의 정보 (인증서를 발급한 CA, 서비스의 도메인 등)</li>
+      <li>서버 측 공개키 (공개키의 내용, 공개키의 암호화 방법)</li>
+    </ul>
+  </li>
+  <li>정의: 클라-서버간 통신을 제3자(CA)가 보증해줄 수 있도록 전달되는 전자화된 문서<br /></li>
+</ul>
+
+<p><em>CA(Certification Authority) 의 정의: 공개키 소유자의 신뢰성을 인증(검증)해주는 제3자 인증 기관.</em><br />
+<em>용어 사용 유의 : Authentication = 인증, Certification = 자격 검증</em><br /></p>
+
+<p>진짜 CA의 인증을 받으려면 비용이 드니까 내가 CA가 되면서 SSL을 쓸 텐데,<br />
+그러면 자물쇠표시+https:// 이 부분에 빨간색 엑스표가 쳐짐.<br />
+이는 이 사이트가 SSL을 쓰긴 쓰는데, 공인된 CA의 인증을 받은 것은 아니라는 뜻.<br />
+<br /></p>
+
+<h3 id="http-https">HTTP, HTTPS</h3>
+<ul>
+  <li>HTTP
+    <ul>
+      <li>= Hypertext Transfer Protocol</li>
+      <li>= HTML 전송 통신규약.</li>
+      <li>암호화 되지 않은 방법으로 데이터를 전송</li>
+      <li>서버-클라이언트 간 오고가는 메시지 감청이 매우 쉽다.</li>
+    </ul>
+  </li>
+  <li>HTTPS
+    <ul>
+      <li>= Hypertext Transfer Protocol Over Secure Socket Layer</li>
+      <li>HTTP + SSL = 보안이 추가된 HTTP.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="php">php</h2>
+<p>대표적인 서버 사이드 스크립트 언어.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="php-fpmphp-fastcgi-process-manger">php-fpm(php-FastCGI Process Manger)</h2>
+<p>빠른 php언어 번역기.<br />
+<em>CGI: Common Gateway Interface</em><br />
+두 컴퓨터(서버-클라이언트) 사이의 HTML등의 언어를 양방향으로 번역해주는 것.<br />
+nginx는 기본적인 마크업 언어 파일(정적 페이지)만 해석 가능<br />
+nginx는 php파일(동적 페이지 = 조건에 따라 변하는 페이지)은 해석 불가(아파치는 가능)<br />
+그래서 nginx + php 조합에서는 php-fpm이 있어야 해석이 됨<br />
+참고: php-fpm 설치하면 php도 설치됨.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="phpmyadmin">phpMyAdmin</h2>
+<p>php를 기반으로 생성된 mySQL의 GUI로서 웹에서 실행할 수 있는 프로그램.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="wordpress">Wordpress</h2>
+<p>오픈소스 CMS(Contents Management System)<br />
+<br />
+<br />
+<br /></p>
+
+:ET
