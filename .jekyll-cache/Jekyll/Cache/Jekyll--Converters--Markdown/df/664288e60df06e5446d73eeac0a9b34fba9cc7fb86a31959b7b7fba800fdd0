@@ -1,4 +1,0 @@
-I"�<p><strong>(1) memset<br /></strong>
-기본 함수 구조 및 매개변수: void *memset ( void* ptr, int value, size_t num );<br />
-return값: ptr<br /></p>
-:ET
